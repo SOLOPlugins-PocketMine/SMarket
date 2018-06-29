@@ -1,0 +1,29 @@
+name: SMarket
+version: 1.0.0
+api: [3.0.0, 3.1.0, 4.0.0]
+author: solo
+main: solo\smarket\SMarket
+permissions:
+  smarket:
+    default: op
+    children:
+      smarket.manage:
+        default: op
+        children:
+          smarket.manage.remove:
+            default: op
+      smarket.command:
+        default: op
+        children:
+          smarket.command.buy:
+            default: true
+          smarket.command.sell:
+            default: true
+          smarket.command.create:
+            default: op
+          smarket.command.validate:
+            default: op
+          smarket.command.buyprice:
+            default: op
+          smarket.command.sellprice:
+            default: op

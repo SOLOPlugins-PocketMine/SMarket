@@ -44,10 +44,6 @@ class Market{
 		return clone $this->item;
 	}
 
-	public function getName(){
-		return $this->item->getName();
-	}
-
 	public function getBuyPrice(){
 		return $this->buyPrice;
 	}

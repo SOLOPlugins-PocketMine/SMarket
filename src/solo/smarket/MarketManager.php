@@ -111,7 +111,7 @@ class MarketManager implements Listener{
 			];
 		}else{
 			$ret = [
-				"§b" . $market->getName() . "§f 을(를) 구매 또는 판매하시겠습니까?§r§f",
+				"§b" . $market->getItem()->getName() . "§f 을(를) 구매 또는 판매하시겠습니까?§r§f",
 				"보유한 금액 : §l§b" . $this->owner->getEconomyAPI()->koreanWonFormat($this->owner->getEconomyAPI()->myMoney($player)) . "§r§f, 보유한 아이템 수 : §l§b" .  Util::itemHollCount($player, $item) . "개§r§f", ($market->getBuyPrice() < 0 ? "구매 불가" : "구매가 : §l§b" . $this->owner->getEconomyAPI()->koreanWonFormat($market->getBuyPrice())) . "§r§f  /  " .($market->getSellPrice() < 0 ? "판매 불가" : "판매가 : §l§b" . $this->owner->getEconomyAPI()->koreanWonFormat($market->getSellPrice())) . "§r§f",
 				"구매하려면 “§b/구매 <수량>§f”, 판매하려면 “§b/판매 <수량>§f”을 입력해주세요.§r§f"
 			];

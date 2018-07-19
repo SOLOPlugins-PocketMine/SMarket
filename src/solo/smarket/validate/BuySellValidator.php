@@ -21,7 +21,7 @@ class BuySellValidator implements Validator{
 				&& $market->getBuyPrice() < $market->getSellPrice()
 		 ){
 				$invalidMarketInfoList[] = new InvalidMarketInfo("상점 구매/판매", $market, $market->getBuyPrice(), [
-					"대상 아이템 : " . $market->getName(),
+					"대상 아이템 : " . $market->getItem()->getName(),
 					"구매가 : " . $market->getBuyPrice(),
 					"판매가 : " . $market->getSellPrice()
 				]);

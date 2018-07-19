@@ -45,7 +45,7 @@ class Market{
 	}
 
 	public function getName(){
-		return Util::itemName($this->item);
+		return $this->item->getName();
 	}
 
 	public function getBuyPrice(){

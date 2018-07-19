@@ -67,7 +67,7 @@ class SellAllTask extends Task{
 			$earned = $money_after - $money_before;
 			$this->totalEarned += $earned;
 
-			$itemname = Util::itemName($content);
+			$itemname = $content->getName();
 			$this->totalSelled[$itemname] =($this->totalSelled[$itemname] ?? 0) + $content->getCount();
 
 			if($this->owner->getSetting()->get("sell-all-at-once")){

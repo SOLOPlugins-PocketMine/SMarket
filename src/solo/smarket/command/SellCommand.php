@@ -9,7 +9,6 @@ use pocketmine\item\Item;
 use solo\smarket\SMarket;
 use solo\smarket\task\SellAllTask;
 use solo\smarket\util\SellException;
-use solo\smarket\util\Util;
 
 class SellCommand extends Command{
 
@@ -76,7 +75,7 @@ class SellCommand extends Command{
 		}
 		$money_after = $this->owner->getEconomyAPI()->myMoney($sender);
 
-		$sender->sendMessage(SMarket::$prefix . "§a" . Util::itemName($market->getItem()) . " " . $count . "개§7를 판매하였습니다.");
+		$sender->sendMessage(SMarket::$prefix . "§a" . $market->getItem()->getName() . " " . $count . "개§7를 판매하였습니다.");
 		$sender->sendMessage(SMarket::$prefix . "판매 전 : " . $this->owner->getEconomyAPI()->koreanWonFormat($money_before) . "  /  판매 후 : §a" . $this->owner->getEconomyAPI()->koreanWonFormat($money_after) . "§7  /  얻은 금액 : §a" . $this->owner->getEconomyAPI()->koreanWonFormat($money_after - $money_before) . "§7");
 
 		$this->owner->getMarketManager()->removeSelectedMarket($sender);

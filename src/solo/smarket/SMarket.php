@@ -8,7 +8,6 @@ use pocketmine\item\Item;
 use pocketmine\utils\Config;
 
 use solo\smarket\task\SaveTask;
-use solo\smarket\util\Util;
 use solo\smarket\validate\Validator;
 use solo\smarket\validate\BuySellValidator;
 use solo\smarket\validate\RecipeValidator;
@@ -59,8 +58,6 @@ class SMarket extends PluginBase{
 		@mkdir($this->getDataFolder());
 		$this->saveResource("setting.yml");
 		$this->setting = new Config($this->getDataFolder() . "setting.yml", Config::YAML);
-
-		Util::init();
 
 		$this->marketFactory = new MarketFactory($this);
 		$this->marketManager = new MarketManager($this);

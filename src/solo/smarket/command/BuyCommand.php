@@ -8,7 +8,6 @@ use pocketmine\command\CommandSender;
 use pocketmine\item\Item;
 use solo\smarket\SMarket;
 use solo\smarket\util\BuyException;
-use solo\smarket\util\Util;
 
 class BuyCommand extends Command{
 
@@ -51,7 +50,7 @@ class BuyCommand extends Command{
 		}
 		$money_after = $this->owner->getEconomyAPI()->myMoney($sender);
 
-		$sender->sendMessage(SMarket::$prefix . "§a" . Util::itemName($market->getItem()) . " " . $count . "개§7를 구매하였습니다.");
+		$sender->sendMessage(SMarket::$prefix . "§a" . $market->getItem()->getName() . " " . $count . "개§7를 구매하였습니다.");
 		$sender->sendMessage(SMarket::$prefix . "구매 전 : " . $this->owner->getEconomyAPI()->koreanWonFormat($money_before) . "  /  구매 후 : §a" . $this->owner->getEconomyAPI()->koreanWonFormat($money_after) . "§7  /  소비한 금액 : §a" . $this->owner->getEconomyAPI()->koreanWonFormat($money_before - $money_after) . "§7");
 
 		$this->owner->getMarketManager()->removeSelectedMarket($sender);

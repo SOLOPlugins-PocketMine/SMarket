@@ -3,7 +3,6 @@
 namespace solo\smarket\validate;
 
 use pocketmine\item\Item as RealItem;
-use solo\smarket\util\Util;
 
 /**
  * 조합 Validation을 위한 클래스입니다.
@@ -25,7 +24,7 @@ class Ingredient{
 	}
 
 	public function getName(){
-		return Util::itemName($this->item);
+		return $this->item->getName();
 	}
 
 	public function getItem(){

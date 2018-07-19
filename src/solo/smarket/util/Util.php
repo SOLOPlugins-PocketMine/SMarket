@@ -10,30 +10,7 @@ use pocketmine\math\Vector3;
 
 class Util{
 
-	public static $sitemdb = null;
-
-	public static function init(){
-		self::$sitemdb = Server::getInstance()->getPluginManager()->getPlugin("SItemDB");
-	}
-
-	public static function itemName(Item $item){
-		if(self::$sitemdb !== null){
-			$info = self::$sitemdb->getItemInfoByItem($item);
-			if($info !== null){
-				return $info->getName();
-			}
-		}
-		if($item->hasCustomName()){
-			return $item->getCustomName();
-		}
-		if(self::$sitemdb !== null){
-			$info = self::$sitemdb->getItemInfoByItem(Item::get($item->getId(), $item->getDamage()));
-			if($info !== null){
-				return $info->getName();
-			}
-		}
-		return $item->getName() ?? "Unknown";
-	}
+	// removed function itemName
 
 	public static function itemFullName(Item $item){
 		return self::itemName($item) . " " . $item->getCount() . "개";
@@ -50,27 +27,7 @@ class Util{
 		return $count;
 	}
 
-	public static function parseItem(string $input){
-		$item = null;
-		// Parse : from SItemDB
-		if(self::$sitemdb !== null){
-			$item = self::$sitemdb->getItem($input);
-		}
-
-		// Parse : id or id:data
-		if($item === null){
-			$item = Item::fromString($input); // PocketMine parse
-			if($item->getId() == Item::AIR){
-				return null;
-			}
-			// --- Default Parser ---
-			//$token = explode(":", $input);
-			//if(count($token) < 3 && is_numeric($token[0] ?? "Nan") && is_numeric($token[1] ?? 0)){
-			//  $item = Item::get(intval($token[0]), intval($token[1] ?? 0));
-			//}
-		}
-		return $item;
-	}
+	// removed function parseItem
 
 	public static function itemHash(Item $item){
 		$hash = $item->getId() . ":" . $item->getDamage();

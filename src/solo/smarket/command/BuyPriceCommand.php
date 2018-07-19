@@ -7,7 +7,6 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\item\Item;
 use solo\smarket\SMarket;
-use solo\smarket\util\Util;
 
 class BuyPriceCommand extends Command{
 
@@ -19,7 +18,7 @@ class BuyPriceCommand extends Command{
 
 		$this->owner = $owner;
 	}
-	
+
 	public function execute(CommandSender $sender, string $label, array $args) : bool{
 		if(!$sender instanceof Player){
 			$sender->sendMessage(SMarket::$prefix . "인게임에서만 사용가능합니다.");
@@ -48,9 +47,9 @@ class BuyPriceCommand extends Command{
 		$market->setBuyPrice($price);
 
 		if($price < 0){
-			$sender->sendMessage(SMarket::$prefix . $market->getName() . " 아이템을 구매불가로 변경하였습니다.");
+			$sender->sendMessage(SMarket::$prefix . $market->getItem()->getName() . " 아이템을 구매불가로 변경하였습니다.");
 		}else{
-			$sender->sendMessage(SMarket::$prefix . $market->getName() . " 아이템의 구매가를 " . $this->owner->getEconomyAPI()->koreanWonFormat($price) . " 으로 설정하였습니다.");
+			$sender->sendMessage(SMarket::$prefix . $market->getItem()->getName() . " 아이템의 구매가를 " . $this->owner->getEconomyAPI()->koreanWonFormat($price) . " 으로 설정하였습니다.");
 		}
 		return true;
 	}

@@ -7,7 +7,6 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\item\Item;
 use solo\smarket\SMarket;
-use solo\smarket\util\Util;
 
 class SellPriceCommand extends Command{
 
@@ -48,9 +47,9 @@ class SellPriceCommand extends Command{
 		$market->setSellPrice($price);
 
 		if($price < 0){
-			$sender->sendMessage(SMarket::$prefix . $market->getName() . " 아이템을 판매불가로 변경하였습니다.");
+			$sender->sendMessage(SMarket::$prefix . $market->getItem()->getName() . " 아이템을 판매불가로 변경하였습니다.");
 		}else{
-			$sender->sendMessage(SMarket::$prefix . $market->getName() . " 아이템의 판매가를 " . $this->owner->getEconomyAPI()->koreanWonFormat($price) . " 으로 설정하였습니다.");
+			$sender->sendMessage(SMarket::$prefix . $market->getItem()->getName() . " 아이템의 판매가를 " . $this->owner->getEconomyAPI()->koreanWonFormat($price) . " 으로 설정하였습니다.");
 		}
 		return true;
 	}

@@ -95,7 +95,7 @@ class MarketManager implements Listener{
 
 	public function generateMarketForm(Market $market){
 		return [
-			"§f" . Util::itemName($market->getItem()),
+			"§f" . $market->getItem()->getName(),
 			$market->getBuyPrice() < 0 ? "§c구매 불가" : "§b구매 : " . $market->getBuyPrice(),
 			$market->getSellPrice() < 0 ? "§c판매 불가" : "§b판매 : " . $market->getSellPrice()
 		];

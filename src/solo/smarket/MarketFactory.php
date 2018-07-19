@@ -520,7 +520,7 @@ class MarketFactory{
 			"406" => [70, 17.5]
 
 		] as $item => $prices){
-			$itemInstance = Util::parseItem($item);
+			$itemInstance = Item::fromString($item);
 			if($itemInstance === null){
 				continue;
 			}

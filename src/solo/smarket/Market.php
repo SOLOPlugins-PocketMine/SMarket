@@ -118,7 +118,7 @@ class Market{
 		}else if($tile instanceof ItemFrame){
 			$display = $tile->getItem();
 			$text =
-				"§f" . $this->->item->getName()
+				"§f" . $this->item->getName()
 				. "\n" .($this->buyPrice < 0 ? "§c구매 불가" : "§b구매 : " . EconomyAPI::getInstance()->koreanWonFormat($this->buyPrice))
 				. "\n" .($this->sellPrice < 0 ? "§c판매 불가" : "§b판매 : " . EconomyAPI::getInstance()->koreanWonFormat($this->sellPrice));
 			if($display->getId() !== $this->item->getId() or $display->getDamage() !== $this->item->getDamage() or $display->getCustomName() !== $text){

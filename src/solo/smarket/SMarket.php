@@ -12,107 +12,107 @@ use solo\smarket\validate\Validator;
 use solo\smarket\validate\BuySellValidator;
 use solo\smarket\validate\RecipeValidator;
 
-class SMarket extends PluginBase{
+class SMarket extends PluginBase {
 
-	public static $prefix = "§l§b[SMarket]§r§7 ";
+    public static $prefix = "§l§b[SMarket]§r§7 ";
 
-	private static $instance = null;
+    private static $instance = null;
 
-	public static function getInstance(){
-		return self::$instance;
-	}
+    public static function getInstance() {
+        return self::$instance;
+    }
 
-	/** @var MarketFactory */
-	private $marketFactory = null;
+    /** @var MarketFactory */
+    private $marketFactory = null;
 
-	/** @var MarketManager */
-	private $marketManager = null;
+    /** @var MarketManager */
+    private $marketManager = null;
 
-	/** @var ProcessManager */
-	private $processManager;
+    /** @var ProcessManager */
+    private $processManager;
 
-	/** @var Validator[] */
-	private $validatorList = [];
+    /** @var Validator[] */
+    private $validatorList = [];
 
-	/** @var EconomyAPI */
-	private $economy;
+    /** @var EconomyAPI */
+    private $economy;
 
-	/** @var Config */
-	private $setting;
+    /** @var Config */
+    private $setting;
 
-	public function onLoad(){
-		if(self::$instance !== null){
-			throw new \InvalidStateException();
-		}
-		self::$instance = $this;
-	}
+    public function onLoad() {
+        if (self::$instance !== null) {
+            throw new \InvalidStateException();
+        }
+        self::$instance = $this;
+    }
 
-	public function onEnable(){
-		// dependency check
-		if(($this->economy = $this->getServer()->getPluginManager()->getPlugin("EconomyAPI")) === null){
-			$this->getServer()->getLogger()->critical("[SMarket] EconomyAPI 플러그인이 없습니다.");
-			$this->getServer()->getPluginManager()->disablePlugin($this);
-			return;
-		}
+    public function onEnable() {
+        // dependency check
+        if (($this->economy = $this->getServer()->getPluginManager()->getPlugin("EconomyAPI")) === null) {
+            $this->getServer()->getLogger()->critical("[SMarket] EconomyAPI 플러그인이 없습니다.");
+            $this->getServer()->getPluginManager()->disablePlugin($this);
+            return;
+        }
 
-		@mkdir($this->getDataFolder());
-		$this->saveResource("setting.yml");
-		$this->setting = new Config($this->getDataFolder() . "setting.yml", Config::YAML);
+        @mkdir($this->getDataFolder());
+        $this->saveResource("setting.yml");
+        $this->setting = new Config($this->getDataFolder() . "setting.yml", Config::YAML);
 
-		$this->marketFactory = new MarketFactory($this);
-		$this->marketManager = new MarketManager($this);
-		$this->processManager = new ProcessManager($this);
+        $this->marketFactory = new MarketFactory($this);
+        $this->marketManager = new MarketManager($this);
+        $this->processManager = new ProcessManager($this);
 
-		$this->validatorList[] = new RecipeValidator($this);
-		$this->validatorList[] = new BuySellValidator($this);
+        $this->validatorList[] = new RecipeValidator($this);
+        $this->validatorList[] = new BuySellValidator($this);
 
-		foreach([
-			"BuyCommand",
-			"BuyPriceCommand",
-			"MarketCreateCommand",
-			"MarketValidateCommand",
-			"SellCommand",
-			"SellPriceCommand"
-		] as $class){
-			$class = "\\solo\\smarket\\command\\" . $class;
-			$this->getServer()->getCommandMap()->register("smarket", new $class($this));
-		}
+        foreach ([
+                         "BuyCommand",
+                         "BuyPriceCommand",
+                         "MarketCreateCommand",
+                         "MarketValidateCommand",
+                         "SellCommand",
+                         "SellPriceCommand"
+                 ] as $class) {
+            $class = "\\solo\\smarket\\command\\" . $class;
+            $this->getServer()->getCommandMap()->register("smarket", new $class($this));
+        }
 
-		$this->getScheduler()->scheduleRepeatingTask(new SaveTask($this), 14800);
-	}
+        $this->getScheduler()->scheduleRepeatingTask(new SaveTask($this), 14800);
+    }
 
-	public function onDisable(){
-		if($this->marketFactory !== null){
-			$this->marketFactory->save();
-		}
-		if($this->marketManager !== null){
-			$this->marketManager->save();
-		}
+    public function onDisable() {
+        if ($this->marketFactory !== null) {
+            $this->marketFactory->save();
+        }
+        if ($this->marketManager !== null) {
+            $this->marketManager->save();
+        }
 
-		self::$instance = null;
-	}
+        self::$instance = null;
+    }
 
-	public function getMarketFactory(){
-		return $this->marketFactory;
-	}
+    public function getMarketFactory() {
+        return $this->marketFactory;
+    }
 
-	public function getMarketManager(){
-		return $this->marketManager;
-	}
+    public function getMarketManager() {
+        return $this->marketManager;
+    }
 
-	public function getProcessManager(){
-		return $this->processManager;
-	}
+    public function getProcessManager() {
+        return $this->processManager;
+    }
 
-	public function getAllValidator(){
-		return $this->validatorList;
-	}
+    public function getAllValidator() {
+        return $this->validatorList;
+    }
 
-	public function getEconomyAPI(){
-		return $this->economy;
-	}
+    public function getEconomyAPI() {
+        return $this->economy;
+    }
 
-	public function getSetting(){
-		return $this->setting;
-	}
+    public function getSetting() {
+        return $this->setting;
+    }
 }

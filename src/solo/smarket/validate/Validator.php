@@ -2,8 +2,8 @@
 
 namespace solo\smarket\validate;
 
-interface Validator{
+interface Validator {
 
-	public function validate();
-	
+    public function validate();
+
 }

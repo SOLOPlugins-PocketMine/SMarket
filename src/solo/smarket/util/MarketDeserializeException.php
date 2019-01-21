@@ -2,6 +2,6 @@
 
 namespace solo\smarket\util;
 
-class MarketDeserializeException extends MarketException{
+class MarketDeserializeException extends MarketException {
 
 }

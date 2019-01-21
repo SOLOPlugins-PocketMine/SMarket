@@ -2,6 +2,6 @@
 
 namespace solo\smarket\util;
 
-class MarketAlreadyExistsException extends MarketException{
+class MarketAlreadyExistsException extends MarketException {
 
 }

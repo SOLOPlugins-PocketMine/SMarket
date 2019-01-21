@@ -2,6 +2,6 @@
 
 namespace solo\smarket\util;
 
-class MarketException extends \Exception{
+class MarketException extends \Exception {
 
 }

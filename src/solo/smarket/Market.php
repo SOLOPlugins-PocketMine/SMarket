@@ -133,14 +133,6 @@ class Market {
         }
     }
 
-    public static function executeMethod(string $method) {
-        $reflection = new \ReflectionClass(Item::class);
-        $method = $reflection->getMethod($method);
-        $method->setAccessible(true);
-
-        return $method;
-    }
-
     public function jsonSerialize() {
         return [
                 "id" => $this->id,
@@ -174,12 +166,12 @@ class Market {
             $nbt = "";
         }
 
-        $market->item = Item::get(
-                (int) $data["item"]["id"],
-                (int) $data["item"]["damage"] ?? 0,
-                1,
-                $nbt !== "" ? self::executeMethod('parseCompoundTag')->invoke(null, $nbt) : null
-        );
+        $market->item = Item::jsonDeserialize([
+                "id" => (int) $data["item"]["id"],
+                "damage" => (int) $data["item"]["damage"] ?? 0,
+                "count" => 1,
+                "nbt" => $nbt
+        ]);
 
         $market->buyPrice = $data["buyPrice"];
         $market->sellPrice = $data["sellPrice"];
